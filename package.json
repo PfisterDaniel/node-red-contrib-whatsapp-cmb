@@ -21,7 +21,7 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
-      "whatsapp": "whatsapp.js"
+      "whatsapp": "nodes/whatsapp.js"
     }
   },
   "bugs": {

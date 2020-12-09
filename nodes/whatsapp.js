@@ -1,4 +1,3 @@
-var request = require('request')
 
 module.exports = function(RED) {
 
@@ -18,6 +17,9 @@ module.exports = function(RED) {
         node.phonenumber = this.credentials.phonenumber; 
 	}
 
+
+
+
     /**
 	 * Function SendMessage
 	 * @param {Config} config 
@@ -26,21 +28,30 @@ module.exports = function(RED) {
 		RED.nodes.createNode(this, config);
         var node = this;
         this.credentials = RED.nodes.getNode(config.account);
-
+        
 		this.on('input', function(msg) {
-            
+            var sendText = msg.text || config.text;
             //Build Request-Link
-            var reqUrl = RootLink + "phone=" + this.credentials.phonenumber +"&text=" + encodeURIComponent(config.text)+ "&apikey=" + this.credentials.key + "&source=nodered";
-            
+            var reqUrl = RootLink + "phone=" + this.credentials.phonenumber +"&text=" + encodeURIComponent(sendText)+ "&apikey=" + this.credentials.key + "&source=nodered";
             //Run Request
+            var request;
+            if(config.rejectssl){
+                request = require('request').defaults({rejectUnauthorized:false});
+            }else{
+                request = require('request')
+            }
             request(reqUrl, function(error, response, body) {
                 try {
-                    var resp = JSON.parse(body)
                     if (error) {
-                        node.error(error)
+                        node.error(msg)
                     } else {
-                        msg.payload = "";
-                        node.send(msg);
+                        if (body.includes('APIKey is invalid')){
+                            node.error("API-KEY not valid!")
+                        }else{
+                            msg.text = sendText;
+                            msg.payload = "Message was send successfully";
+                            node.send(msg);
+                        }
                     }
                 } catch(error) {
                         node.error(error)

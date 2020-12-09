@@ -1,6 +1,8 @@
 <script type='text/javascript'>
-	RED.nodes.registerType('node-red-whatsapp-account', {
-    category: 'config',
+	RED.nodes.registerType('node-red-contrib-whatsapp-cmb-account', {
+        category: 'config',
+        icon: "whatsapp.svg",
+        color: "#25D366",
         defaults: {
             name: {value: ""}
         },
@@ -8,7 +10,6 @@
             key: {type:"password"},
             phonenumber: {type:"text"}
         },
-        icon: "whatsapp.png",
         label: function() {
             return this.name||"Whatsapp Account";
         },
@@ -18,7 +19,7 @@
     });
 </script>
 
-<script type='text/x-red' data-template-name='node-red-whatsapp-account'>
+<script type='text/x-red' data-template-name='node-red-contrib-whatsapp-cmb-account'>
 	<div class='form-row'>
 		<label for='node-config-input-name'><i class='fa fa-tag'></i> Name</label>
 		<input type='text' id='node-config-input-name'/>
@@ -28,40 +29,45 @@
 		<input type='text' id='node-config-input-phonenumber' placeholder="Phone Number"/>
 	</div>
 	<div class='form-row'>
-		<label for='node-config-input-key'><i class='fa'></i> Api Key</label>
+		<label for='node-config-input-key'><i class='fa fa-key'></i> API-KEY</label>
 		<input type='password' id='node-config-input-key' placeholder="API-KEY for WhatsApp CMB"/>
     </div>
     <div class="form-tips">
-        <p><b>Note</b>: You can create a API-Account <a href="">here</a>.</p>
+        <p><b>Note</b>: How to create an API key? Show <a href="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb#readme">here</a> for more information.</p>
     </div>
 </script>
 
 
 
 <script type='text/javascript'>
-	RED.nodes.registerType('node-red-whatsapp-send-message', {
+	RED.nodes.registerType('node-red-contrib-whatsapp-cmb-send-message', {
 		category: 'WhatsApp',
-        icon: "whatsapp.png",
+        icon: "whatsapp.svg",
+        color: "#25D366",
         paletteLabel: 'Send Message',
 		defaults: {
 			name: {
 				value: '',
 				required: false
             },
-            account: {value: "", type:"node-red-whatsapp-account", required: true},
+            account: {value: "", type:"node-red-contrib-whatsapp-cmb-account", required: true},
             text:{
 				value: '',
 				required: false
-            }
+            },
+            rejectssl: { value: false }
 		},
 		label: function() {
 			return this.name ? this.name : 'Send Message'
 		},
 		inputs: 1,
 		outputs: 1,
-		oneditprepare: function() {
+		oneditprepare: function(){
             console.log('prepare', this);
-		},
+            if (this.rejectssl === undefined) {
+                $("#node-config-input-rejectssl").prop('checked', false);
+            }
+        },
         oneditsave: function() {
             console.log('save', this);
         },
@@ -71,17 +77,24 @@
 	})
 </script>
 
-<script type='text/x-red' data-template-name='node-red-whatsapp-send-message'>
+<script type='text/x-red' data-template-name='node-red-contrib-whatsapp-cmb-send-message'>
 	<div class='form-row'>
 		<label for='node-input-name'><i class='fa fa-tag'></i> Name</label>
 		<input type='text' id='node-input-name'/>
     </div>
     <div class="form-row">
-		<label for="node-input-account"> Account</label>
+		<label for="node-input-account"><i class="fa fa-user"></i> Account</label>
 		<input type="text" id="node-input-account">
     </div>
     <div class="form-row">
-		<label for="node-input-text"> Message</label>
+		<label for="node-input-text"><i class="fa fa-commenting-o"></i> Message</label>
 		<textarea id="node-input-text" rows="5" style="width:100%"></textarea>
+    </div>
+    <div class="form-row">
+        <label for="node-input-rejectssl" style="width:160px"><i class="fa fa-shield"></i> Reject-Unauthorized:</label>
+        <input type="checkbox" checked id="node-input-rejectssl" style="display:inline-block; width:auto; vertical-align:top;">
+    </div>
+    <div class="form-tips">
+        <p><b>Note</b>: If you received the error "unable to get local issuer certificate", you can skip the error with "Reject-Unauthorized", but this is not a secure option.</p>
     </div>
 </script>
