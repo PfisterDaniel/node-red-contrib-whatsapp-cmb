@@ -22,7 +22,7 @@ Redmatic:
     $ npm install --save --no-package-lock --global-style --save-prefix="~" --production node-red-contrib-whatsapp-cmb
 	
 	
-##Create API-KEY
+## Create API-KEY
 
 1. Add the phone number +34 644 53 78 49  into your Phone Contacts. (Name it it as you wish)
 2. Send this message "I allow callmebot to send me messages" to the new Contact created (using WhatsApp of course)
