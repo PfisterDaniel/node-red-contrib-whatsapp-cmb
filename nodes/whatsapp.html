@@ -1,0 +1,87 @@
+<script type='text/javascript'>
+	RED.nodes.registerType('node-red-whatsapp-account', {
+    category: 'config',
+        defaults: {
+            name: {value: ""}
+        },
+        credentials: {
+            key: {type:"password"},
+            phonenumber: {type:"text"}
+        },
+        icon: "whatsapp.png",
+        label: function() {
+            return this.name||"Whatsapp Account";
+        },
+        oneditsave: function(){
+            console.log('save', this);
+        }
+    });
+</script>
+
+<script type='text/x-red' data-template-name='node-red-whatsapp-account'>
+	<div class='form-row'>
+		<label for='node-config-input-name'><i class='fa fa-tag'></i> Name</label>
+		<input type='text' id='node-config-input-name'/>
+    </div>
+    <div class='form-row'>
+		<label for='node-config-input-phonenumber'><i class='fa fa-phone'></i> Name</label>
+		<input type='text' id='node-config-input-phonenumber' placeholder="Phone Number"/>
+	</div>
+	<div class='form-row'>
+		<label for='node-config-input-key'><i class='fa'></i> Api Key</label>
+		<input type='password' id='node-config-input-key' placeholder="API-KEY for WhatsApp CMB"/>
+    </div>
+    <div class="form-tips">
+        <p><b>Note</b>: You can create a API-Account <a href="">here</a>.</p>
+    </div>
+</script>
+
+
+
+<script type='text/javascript'>
+	RED.nodes.registerType('node-red-whatsapp-send-message', {
+		category: 'WhatsApp',
+        icon: "whatsapp.png",
+        paletteLabel: 'Send Message',
+		defaults: {
+			name: {
+				value: '',
+				required: false
+            },
+            account: {value: "", type:"node-red-whatsapp-account", required: true},
+            text:{
+				value: '',
+				required: false
+            }
+		},
+		label: function() {
+			return this.name ? this.name : 'Send Message'
+		},
+		inputs: 1,
+		outputs: 1,
+		oneditprepare: function() {
+            console.log('prepare', this);
+		},
+        oneditsave: function() {
+            console.log('save', this);
+        },
+        oneditresize: function() {
+            console.log('resize', this);
+        }
+	})
+</script>
+
+<script type='text/x-red' data-template-name='node-red-whatsapp-send-message'>
+	<div class='form-row'>
+		<label for='node-input-name'><i class='fa fa-tag'></i> Name</label>
+		<input type='text' id='node-input-name'/>
+    </div>
+    <div class="form-row">
+		<label for="node-input-account"> Account</label>
+		<input type="text" id="node-input-account">
+    </div>
+    <div class="form-row">
+		<label for="node-input-text"> Message</label>
+		<textarea id="node-input-text" rows="5" style="width:100%"></textarea>
+    </div>
+</script>
