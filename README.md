@@ -30,3 +30,8 @@ Redmatic:
 4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
 
 <img src="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/blob/main/images/create_api_key_example.jpg" width="500" height="117">
+
+
+
+## Bugs and feature requests
+Please create an issue in [GitHub](https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/issues)
