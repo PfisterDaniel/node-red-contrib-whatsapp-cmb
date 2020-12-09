@@ -43,7 +43,7 @@ module.exports = function(RED) {
             request(reqUrl, function(error, response, body) {
                 try {
                     if (error) {
-                        node.error(msg)
+                        node.error(error)
                     } else {
                         if (body.includes('APIKey is invalid')){
                             node.error("API-KEY not valid!")
@@ -65,11 +65,11 @@ module.exports = function(RED) {
     /**
 	 * Register Nodes
 	 */
-    RED.nodes.registerType('node-red-whatsapp-account', WhatsAppAccount,{
+    RED.nodes.registerType('node-red-contrib-whatsapp-cmb-account', WhatsAppAccount,{
         credentials: {
             key: {type:"password"},
             phonenumber: {type:"text"}
         }
     });
-    RED.nodes.registerType('node-red-whatsapp-send-message', SendMessage);
+    RED.nodes.registerType('node-red-contrib-whatsapp-cmb-send-message', SendMessage);
 }

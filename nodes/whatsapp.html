@@ -22,15 +22,15 @@
 <script type='text/x-red' data-template-name='node-red-contrib-whatsapp-cmb-account'>
 	<div class='form-row'>
 		<label for='node-config-input-name'><i class='fa fa-tag'></i> Name</label>
-		<input type='text' id='node-config-input-name'/>
+		<input type='text' id='node-config-input-name' placeholder="Name for the account"/>
     </div>
     <div class='form-row'>
-		<label for='node-config-input-phonenumber'><i class='fa fa-phone'></i> Name</label>
-		<input type='text' id='node-config-input-phonenumber' placeholder="Phone Number"/>
+		<label for='node-config-input-phonenumber'><i class='fa fa-phone'></i> Phone</label>
+		<input type='text' id='node-config-input-phonenumber' placeholder="Your phone number"/>
 	</div>
 	<div class='form-row'>
 		<label for='node-config-input-key'><i class='fa fa-key'></i> API-KEY</label>
-		<input type='password' id='node-config-input-key' placeholder="API-KEY for WhatsApp CMB"/>
+		<input type='password' id='node-config-input-key' placeholder="Your API-KEY for WhatsApp-CMB"/>
     </div>
     <div class="form-tips">
         <p><b>Note</b>: How to create an API key? Show <a href="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/blob/main/README.md#create-api-key">here</a> for more information.</p>
@@ -80,7 +80,7 @@
 <script type='text/x-red' data-template-name='node-red-contrib-whatsapp-cmb-send-message'>
 	<div class='form-row'>
 		<label for='node-input-name'><i class='fa fa-tag'></i> Name</label>
-		<input type='text' id='node-input-name'/>
+		<input type='text' id='node-input-name' placeholder="Name for the node"/>
     </div>
     <div class="form-row">
 		<label for="node-input-account"><i class="fa fa-user"></i> Account</label>
@@ -97,4 +97,41 @@
     <div class="form-tips">
         <p><b>Note</b>: If you received the error "unable to get local issuer certificate", you can skip the error with "Reject-Unauthorized", but this is not a secure option.</p>
     </div>
+</script>
+
+<script type="text/html" data-help-name="node-red-contrib-whatsapp-cmb-send-message">
+    <p>Send a message with WhatsApp CallmeBot</p>
+    
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+            <dt class="optional">text
+                <span class="property-type">string</span>
+            </dt>
+            <dd> the text of the message to send.</dd>
+        </dl>
+    <h3>Outputs</h3>
+        <ol class="node-ports">
+            <li>Standard output
+                <dl class="message-properties">
+                    <dt>payload <span class="property-type">string</span></dt>
+                    <dd>the standard output of the command.</dd>
+                </dl>
+            </li>
+            <li>Standard error
+                <dl class="message-properties">
+                    <dt>error <span class="property-type">string</span></dt>
+                    <dd>the standard error of the command.</dd>
+                </dl>
+            </li>
+        </ol>
+   
+   <h3>Details</h3>
+       <p><code>msg.text</code> is used as the message you want to send. It must be a String.</p>
+       
+   <!--<h3>References</h3>
+       <ul>
+           <li><a>Twitter API docs</a> - full description of <code>msg.tweet</code> property</li>
+           <li><a>GitHub</a> - the nodes github repository</li>
+       </ul>
+    -->   
 </script>
