@@ -1,4 +1,4 @@
-# [node-red](http://nodered.org)-contrib-whatsapp-cmb
+# <img src="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/blob/main/nodes/icons/whatsapp.svg" width="48"> [node-red](http://nodered.org)-contrib-whatsapp-cmb
 
 
 ## Installation
