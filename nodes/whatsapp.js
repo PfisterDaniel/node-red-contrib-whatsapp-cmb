@@ -46,7 +46,7 @@ module.exports = function(RED) {
                         node.error(error)
                     } else {
                         if (body.includes('APIKey is invalid')){
-                            node.error("API-KEY not valid!")
+                            node.error("API-KEY not valid! Please check your phone number or API-KEY!")
                         }else{
                             msg.text = sendText;
                             msg.payload = "Message was send successfully";

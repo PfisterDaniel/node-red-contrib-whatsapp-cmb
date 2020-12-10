@@ -1,0 +1,65 @@
+[
+    {
+        "id": "90eae997.db5198",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "898ead4d.1f05d",
+        "name": "",
+        "account": "80b99021.9a4",
+        "text": "",
+        "rejectssl": true,
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "b234123a.c95f5"
+            ]
+        ]
+    },
+    {
+        "id": "9b666f3e.797cb",
+        "type": "inject",
+        "z": "898ead4d.1f05d",
+        "name": "",
+        "props": [
+            {
+                "p": "text",
+                "v": "This is the Message Text",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "90eae997.db5198"
+            ]
+        ]
+    },
+    {
+        "id": "b234123a.c95f5",
+        "type": "debug",
+        "z": "898ead4d.1f05d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "80b99021.9a4",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "WhatsApp API Account"
+    }
+]
