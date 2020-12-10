@@ -30,9 +30,16 @@ module.exports = function(RED) {
         this.credentials = RED.nodes.getNode(config.account);
         
 		this.on('input', function(msg) {
-            var sendText = msg.text || config.text;
+            var SendText = "";
+			if(config.inputtypemessage === "msg"){
+				var buildText = eval("msg." + config.text)
+				SendText = buildText;
+			}else{
+				SendText = config.text;
+			}
+            
             //Build Request-Link
-            var reqUrl = RootLink + "phone=" + this.credentials.phonenumber +"&text=" + encodeURIComponent(sendText)+ "&apikey=" + this.credentials.key + "&source=nodered";
+            var reqUrl = RootLink + "phone=" + this.credentials.phonenumber +"&text=" + encodeURIComponent(SendText)+ "&apikey=" + this.credentials.key + "&source=nodered";
             //Run Request
             var request;
             if(config.rejectssl){
@@ -48,8 +55,7 @@ module.exports = function(RED) {
                         if (body.includes('APIKey is invalid')){
                             node.error("API-KEY not valid! Please check your phone number or API-KEY!")
                         }else{
-                            msg.text = sendText;
-                            msg.payload = "Message was send successfully";
+                            msg.payload = "Message '" + SendText + "' was send successfully";
                             node.send(msg);
                         }
                     }

@@ -53,8 +53,10 @@
             account: {value: "", type:"node-red-contrib-whatsapp-cmb-account", required: true},
             text:{
 				value: '',
-				required: false
+				required: false,
+				validate: RED.validators.typedInput('inputtype')
             },
+			inputtypemessage: { value: 'str' },
             rejectssl: { value: false }
 		},
 		label: function() {
@@ -67,6 +69,11 @@
             if (this.rejectssl === undefined) {
                 $("#node-config-input-rejectssl").prop('checked', false);
             }
+			$('#node-input-text').typedInput({
+                default: 'str',
+                typeField: $("#node-input-inputtypemessage"),
+                types: ['msg','str']
+            });
         },
         oneditsave: function() {
             console.log('save', this);
@@ -88,7 +95,9 @@
     </div>
     <div class="form-row">
 		<label for="node-input-text"><i class="fa fa-commenting-o"></i> Message</label>
-		<textarea id="node-input-text" rows="5" style="width:100%" placeholder="Message direct or with msg.text"></textarea>
+		<!--<textarea id="node-input-text" rows="5" style="width:100%"></textarea>-->
+		<input type="text" id="node-input-text" style="width:70%">
+		<input type="hidden" id="node-input-inputtypemessage">
     </div>
     <div class="form-row">
         <label for="node-input-rejectssl" style="width:160px"><i class="fa fa-shield"></i> Reject-Unauthorized:</label>
@@ -104,7 +113,7 @@
     
     <h3>Inputs</h3>
         <dl class="message-properties">
-            <dt class="optional">text
+            <dt class="optional">
                 <span class="property-type">string</span>
             </dt>
             <dd> the text of the message to send.</dd>
