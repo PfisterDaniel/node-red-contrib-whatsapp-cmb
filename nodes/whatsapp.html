@@ -112,12 +112,21 @@
     <p>Send a message with WhatsApp CallmeBot</p>
     
     <h3>Inputs</h3>
-        <dl class="message-properties">
-            <dt class="optional">
-                <span class="property-type">string</span>
-            </dt>
-            <dd> the text of the message to send.</dd>
-        </dl>
+        <ol class="node-ports">
+            <li>Static String
+                <dl class="message-properties">
+                    <dt>String <span class="property-type">string</span></dt>
+                    <dd> the text of the message to send.</dd>
+                </dl>
+            </li>
+            <li>Variable Input
+                <dl class="message-properties">
+                    <dt>msg.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a previous node.</dd>
+                    <dd> Example: msg.payload or msg.text</dd>
+                </dl>
+            </li>
+        </ol>
     <h3>Outputs</h3>
         <ol class="node-ports">
             <li>Standard output
