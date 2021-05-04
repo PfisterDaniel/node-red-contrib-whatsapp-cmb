@@ -28,7 +28,7 @@ Redmatic:
 3. Wait until you receive the message "API *Activated* for your phone number. Your APIKEY is *123123*" from the bot. As this is still in beta testing, the activation can take up to 2 minutes.
 4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
 
-<img src="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/blob/main/images/create_api_key_example.jpg" width="500" height="117">
+<img src="https://raw.githubusercontent.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/main/images/create_api_key_example.jpg" width="500" height="117">
 
 ## Example Flow:
 ```yaml
