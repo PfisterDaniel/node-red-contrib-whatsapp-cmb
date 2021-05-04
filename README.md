@@ -30,6 +30,7 @@ Redmatic:
 
 <img src="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/raw/main/images/create_api_key_example.jpg" width="500" height="117">
 
+
 ## Example Flow:
 ```yaml
 [
