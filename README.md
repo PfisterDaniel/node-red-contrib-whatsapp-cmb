@@ -1,6 +1,11 @@
 # <img src="https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb/blob/main/nodes/icons/whatsapp.svg" width="60"> [node-red](http://nodered.org)-contrib-whatsapp-cmb
 
 
+## Donation:
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=NF8XH8AMXZV2J)
+
+
+
 ## Installation
 [![NPM](https://nodei.co/npm/node-red-contrib-whatsapp-cmb.png)](https://npmjs.org/package/node-red-contrib-whatsapp-cmb)
 [![Downloads](https://img.shields.io/npm/dm/node-red-contrib-whatsapp-cmb.svg)](https://www.npmjs.com/package/node-red-contrib-whatsapp-cmb)
