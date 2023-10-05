@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-whatsapp-cmb",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Node-RED node to send WhatsApp Messages with WhatsApp CallmeBot",
   "main": "index.js",
   "scripts": {
