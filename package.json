@@ -20,6 +20,7 @@
   "email": "kontakt@daniel-pfister.de",
   "license": "MIT",
   "node-red": {
+    "version": ">=2.0.0",
     "nodes": {
       "whatsapp": "nodes/whatsapp.js"
     }
@@ -30,5 +31,8 @@
   "homepage": "https://github.com/PfisterDaniel/node-red-contrib-whatsapp-cmb#readme",
   "dependencies": {
     "request": "^2.88.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   }
 }
