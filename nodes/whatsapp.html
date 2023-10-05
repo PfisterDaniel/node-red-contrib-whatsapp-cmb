@@ -49,13 +49,29 @@
 			name: {
 				value: '',
 				required: false
-            },
-            account: {value: "", type:"node-red-contrib-whatsapp-cmb-account", required: true},
+            },  
+            credtype: {
+				value: '',
+				required: true
+            },  
+            account: {value: "", type:"node-red-contrib-whatsapp-cmb-account", required: false},
             text:{
 				value: '',
 				required: false,
 				validate: RED.validators.typedInput('inputtype')
             },
+            phonenumbervalue:{
+				value: '',
+				required: false,
+				validate: RED.validators.typedInput('inputtype')
+            },
+            apikeyvalue:{
+				value: '',
+				required: false,
+				validate: RED.validators.typedInput('inputtype')
+            },
+            apikeyinputtypemessage: { value: 'msg' },
+            phonenumberinputtypemessage: { value: 'msg' },
 			inputtypemessage: { value: 'str' },
             rejectssl: { value: false }
 		},
@@ -72,8 +88,48 @@
 			$('#node-input-text').typedInput({
                 default: 'str',
                 typeField: $("#node-input-inputtypemessage"),
-                types: ['msg','str']
+                types: ['flow','global','msg','str']
             });
+            $('#node-input-phonenumbervalue').typedInput({
+                default: 'msg',
+                typeField: $("#node-input-phonenumberinputtypemessage"),
+                types: ['flow','global','msg']
+            });
+            $('#node-input-apikeyvalue').typedInput({
+                default: 'msg',
+                typeField: $("#node-input-apikeyinputtypemessage"),
+                types: ['flow','global','msg']
+            });
+            $("#node-input-credtype").typedInput({
+                types: [
+                    {
+                        value: "credtypes",
+                        options: [
+                            { value: "account", label: "Account-Node"},
+                            { value: "vars", label: "Variables"},
+                        ]
+                    }
+                ]
+            });
+
+            $("#node-input-credtype").change(function () {
+                switch ($(this).val()) {
+                    case 'account':
+                        console.log('Account')
+                        $('#row-apikey').hide();
+                        $('#row-phonenumber').hide();
+                        $('#row-account').show();
+                        break
+                    case 'vars':
+                        console.log('Variables')
+                        $('#row-apikey').show();
+                        $('#row-phonenumber').show();
+                        $('#row-account').hide();
+                        break
+                    default:
+                        console.log('default')
+                }
+            })
         },
         oneditsave: function() {
             console.log('save', this);
@@ -90,8 +146,22 @@
 		<input type='text' id='node-input-name' placeholder="Name for the node"/>
     </div>
     <div class="form-row">
+        <label for="node-input-credtype"><i class="fa fa-sign-in"></i> Credential-Type</label>
+        <input type="text" id="node-input-credtype">
+    </div>
+    <div class="form-row" id="row-account">
 		<label for="node-input-account"><i class="fa fa-user"></i> Account</label>
 		<input type="text" id="node-input-account">
+    </div>
+    <div class="form-row" id="row-apikey">
+        <label for="node-input-apikeyvalue"><i class="fa fa-key"></i> API-Key</label>
+        <input type="text" id="node-input-apikeyvalue">
+        <input type="hidden" id="node-input-apikeyinputtypemessage">
+    </div>
+    <div class="form-row" id="row-phonenumber">
+        <label for="node-input-phonenumbervalue"><i class="fa fa-mobile"></i> Phone-Number</label>
+        <input type="text" id="node-input-phonenumbervalue">
+        <input type="hidden" id="node-input-phonenumberinputtypemessage">
     </div>
     <div class="form-row">
 		<label for="node-input-text"><i class="fa fa-commenting-o"></i> Message</label>
@@ -113,17 +183,54 @@
     
     <h3>Inputs</h3>
         <ol class="node-ports">
-            <li>Static String
+            <li>Name</li>
+            <li>Credential-Types
                 <dl class="message-properties">
-                    <dt>String <span class="property-type">string</span></dt>
-                    <dd> the text of the message to send.</dd>
+                    <dt> Account-Node <span class="property-type">value</span></dt>
+                    <dd> Using an Account-Node for the credential information</dd>
+                    <dt> Variables <span class="property-type">value</span></dt>
+                    <dd> Using a variable for the credential information</dd>
                 </dl>
             </li>
-            <li>Variable Input
+            <li>API-Key
                 <dl class="message-properties">
                     <dt>msg.< Element-Name > <span class="property-type">string</span></dt>
                     <dd> Variable string from a previous node.</dd>
+                    <dd> Example: msg.apikey or msg.key</dd>
+                    <dt> flow.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a flow variable.</dd>
+                    <dd> Example: flow.apikey or flow.key</dd>
+                    <dt> global.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a global variable.</dd>
+                    <dd> Example: global.apikey or global.key</dd>
+                </dl>
+            </li>
+            <li>Phone-Number
+                <dl class="message-properties">
+                    <dt>msg.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a previous node.</dd>
+                    <dd> Example: msg.phone or msg.number</dd>
+                    <dt> flow.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a flow variable.</dd>
+                    <dd> Example: flow.phone or flow.number</dd>
+                    <dt> global.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a global variable.</dd>
+                    <dd> Example: global.phone or global.number</dd>
+                </dl>
+            </li>
+            <li>Message
+                <dl class="message-properties">
+                    <dt>str <span class="property-type">string</span></dt>
+                    <dd> Static String</dd>
+                    <dt>msg.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a previous node.</dd>
                     <dd> Example: msg.payload or msg.text</dd>
+                    <dt>flow.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a flow variable.</dd>
+                    <dd> Example: flow.payload or flow.text</dd>
+                    <dt>global.< Element-Name > <span class="property-type">string</span></dt>
+                    <dd> Variable string from a global variable.</dd>
+                    <dd> Example: global.payload or global.text</dd>
                 </dl>
             </li>
         </ol>
@@ -142,14 +249,4 @@
                 </dl>
             </li>
         </ol>
-   
-   <h3>Details</h3>
-       <p><code>msg.text</code> is used as the message you want to send. It must be a String. You can use it directly or with output from another node.</p>
-       
-   <!--<h3>References</h3>
-       <ul>
-           <li><a>Twitter API docs</a> - full description of <code>msg.tweet</code> property</li>
-           <li><a>GitHub</a> - the nodes github repository</li>
-       </ul>
-    -->   
 </script>
