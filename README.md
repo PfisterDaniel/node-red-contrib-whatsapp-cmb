@@ -32,7 +32,7 @@ Redmatic:
 	
 ## Create API-KEY
 
-1. Add the phone number +34 644 66 32 62  into your Phone Contacts. (Name it it as you wish)
+1. Add the phone number +34 694 29 84 96  into your Phone Contacts. (Name it it as you wish)
 2. Send this message *"I allow callmebot to send me messages"* to the new Contact created (using WhatsApp of course)
 3. Wait until you receive the message "API *Activated* for your phone number. Your APIKEY is *123123*" from the bot. As this is still in beta testing, the activation can take up to 2 minutes.
 4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
